@@ -1,13 +1,11 @@
-package com.softvision.WalletSimulator;
+package com.softvision.walletsimulator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WalletSimulatorApplication {
-
+public class Application {
 	public static void main(String[] args) {
-		SpringApplication.run(WalletSimulatorApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
-
 }
