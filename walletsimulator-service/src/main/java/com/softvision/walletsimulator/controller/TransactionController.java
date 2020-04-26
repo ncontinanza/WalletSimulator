@@ -1,6 +1,7 @@
 package com.softvision.walletsimulator.controller;
 
-import com.softvision.walletsimulator.domain.service.TransferenceService;
+import com.softvision.walletsimulator.api.model.Wallet;
+import com.softvision.walletsimulator.domain.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,20 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("transfer")
-public class TransferenceController {
+@RequestMapping("transaction")
+public class TransactionController {
 
-    private TransferenceService transferenceService;
+    private TransactionService transactionService;
 
     @Autowired
-    public TransferenceController(TransferenceService transferenceService) {
-        this.transferenceService = transferenceService;
+    public TransactionController(TransactionService transactionService) {
+        this.transactionService = transactionService;
     }
 
-    @PostMapping
+    @PostMapping(path="/transfer")
     public ResponseEntity<String> transfer() {
         return ResponseEntity.ok(HttpStatus.OK.toString());
     }
+
+    @PostMapping(path="/buy")
+    public ResponseEntity<Wallet> buyCurrency() { return null; }
 
 
 

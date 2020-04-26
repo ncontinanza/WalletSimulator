@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
 
 @Service
 public class CurrencyService {
-
     private CurrencyClient currencyClient;
 
     @Autowired

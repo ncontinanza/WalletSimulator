@@ -2,48 +2,40 @@ package com.softvision.walletsimulator.controller;
 
 import com.softvision.walletsimulator.api.model.Wallet;
 import com.softvision.walletsimulator.domain.service.WalletService;
-import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
+
 @RestController
-@RequestMapping("wallet")
+@RequestMapping("/wallet")
 public class WalletController {
-    private MapperFactory mapperFactory;
     private WalletService walletService;
 
     @Autowired
     public WalletController(WalletService walletService){
         this.walletService = walletService;
-        this.mapperFactory = new DefaultMapperFactory.Builder().mapNulls(false).build();
     }
 
-    @PostMapping(path="/{walletName}")
-    public ResponseEntity<Wallet> createWallet(@PathVariable String name, @RequestBody(required = false) Wallet wallet) {
-        com.softvision.walletsimulator.domain.model.Wallet domainWallet = mapperFactory.getMapperFacade().map(wallet, com.softvision.walletsimulator.domain.model.Wallet.class);
-        com.softvision.walletsimulator.domain.model.Wallet responseWallet = walletService.createWallet(name, domainWallet);
-        return ResponseEntity.ok(mapperFactory.getMapperFacade().map(responseWallet, Wallet.class));
+    @PostMapping(value="/{walletName}")
+    public ResponseEntity<Wallet> createWallet(@PathVariable String walletName, @RequestBody(required = false) LinkedHashMap<String,Double> initialValues) {
+        return ResponseEntity.ok(walletService.createWallet(walletName, initialValues));
     }
 
-    @GetMapping(path="/{walletName}")
-    public ResponseEntity<Wallet> getWallet(@PathVariable Integer id) {
+    @GetMapping(value="/{walletId}")
+    public ResponseEntity<Wallet> getWallet(@PathVariable Integer walletId) {
         // TODO: try to make id a Long variable.
-        Wallet responseWallet = mapperFactory.getMapperFacade().map(walletService.getWalletById(id), Wallet.class);
-        return ResponseEntity.ok(responseWallet);
+        return ResponseEntity.ok(walletService.getWalletById(walletId));
     }
 
-    @PutMapping
-    public ResponseEntity<Wallet> updateWallet(@PathVariable Wallet wallet) {
-        com.softvision.walletsimulator.domain.model.Wallet domainWallet = mapperFactory.getMapperFacade().map(wallet, com.softvision.walletsimulator.domain.model.Wallet.class);
-        com.softvision.walletsimulator.domain.model.Wallet responseWallet = walletService.updateWallet(domainWallet);
-        return ResponseEntity.ok(mapperFactory.getMapperFacade().map(responseWallet, Wallet.class));
+    @PutMapping(value="/{walletId}")
+    public ResponseEntity<Wallet> updateWallet(@PathVariable Integer walletId, @RequestBody Wallet updatedWallet) {
+        return ResponseEntity.ok(walletService.updateWallet(walletId, updatedWallet));
     }
 
-    @DeleteMapping
-    public ResponseEntity<Wallet> removeWallet(@PathVariable Integer id) {
-        Wallet responseWallet = mapperFactory.getMapperFacade().map(walletService.removeWallet(id), Wallet.class);
-        return ResponseEntity.ok(responseWallet);
+    @DeleteMapping(value="/{walletId}")
+    public ResponseEntity<Wallet> removeWallet(@PathVariable Integer walletId) {
+        return ResponseEntity.ok(walletService.removeWallet(walletId));
     }
 }

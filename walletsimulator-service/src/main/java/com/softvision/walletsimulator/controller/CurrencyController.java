@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 @RestController
-@RequestMapping("currency")
+@RequestMapping("/currency")
 public class CurrencyController {
 
     private CurrencyService currencyService;
@@ -21,7 +21,7 @@ public class CurrencyController {
     }
 
     @GetMapping
-    public ResponseEntity<HashMap<String, Double>> getAllCurrencies() {
-        return null;
+    public ResponseEntity<LinkedHashMap<String, Double>> getAllCurrencies() {
+        return ResponseEntity.ok(currencyService.getCurrencies());
     }
 }
