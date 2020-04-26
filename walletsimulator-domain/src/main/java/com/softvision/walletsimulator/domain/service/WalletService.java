@@ -18,7 +18,7 @@ public class WalletService {
     public Wallet createWallet(String name, Wallet wallet) {
         // TODO: validate input
         wallets.put(wallet.getId(), wallet);
-
+        return null;
     }
 
     public Wallet getWalletById(Integer id) {
@@ -26,10 +26,10 @@ public class WalletService {
     }
 
     public Wallet updateWallet(Wallet wallet) {
-
+        return null;
     }
 
     public Wallet removeWallet(Integer id) {
-
+        return null;
     }
 }
