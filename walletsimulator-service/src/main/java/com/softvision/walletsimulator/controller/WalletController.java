@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/wallet")
@@ -20,7 +21,8 @@ public class WalletController {
 
     @PostMapping(value="/{walletName}")
     public ResponseEntity<Wallet> createWallet(@PathVariable String walletName, @RequestBody(required = false) LinkedHashMap<String,Double> initialValues) {
-        return ResponseEntity.ok(walletService.createWallet(walletName, initialValues));
+        LinkedHashMap<String,Double> available = Optional.ofNullable(initialValues).orElse(new LinkedHashMap<>());
+        return ResponseEntity.ok(walletService.createWallet(walletName, available));
     }
 
     @GetMapping(value="/{walletId}")

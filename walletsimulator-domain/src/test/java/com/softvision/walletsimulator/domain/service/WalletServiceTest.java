@@ -28,7 +28,7 @@ public class WalletServiceTest {
 
     @Test
     public void createWalletWithNameTest() {
-        Wallet wallet = walletService.createWallet(walletName, null);
+        Wallet wallet = walletService.createWallet(walletName, new LinkedHashMap<>());
         Assert.assertEquals(walletName, wallet.getName());
         Assert.assertTrue(wallet.getAvailable().isEmpty());
     }

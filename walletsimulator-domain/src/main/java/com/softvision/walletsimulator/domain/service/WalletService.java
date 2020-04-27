@@ -18,9 +18,6 @@ public class WalletService {
     }
 
     public Wallet createWallet(String name, LinkedHashMap<String,Double> initialValues) {
-        // TODO: validate input in a better way
-        if (initialValues == null)
-            initialValues = new LinkedHashMap<>();
         Wallet wallet = new Wallet(name, initialValues);
         wallets.put(wallet.getId(), wallet);
         return wallet;
