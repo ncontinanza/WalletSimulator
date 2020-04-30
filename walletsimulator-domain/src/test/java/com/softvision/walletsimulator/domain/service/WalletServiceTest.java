@@ -11,10 +11,12 @@ import org.junit.rules.ExpectedException;
 import java.util.LinkedHashMap;
 
 import static java.lang.String.format;
+import static org.mockito.Mockito.mock;
 
 public class WalletServiceTest {
 
     private WalletService walletService;
+    private CurrencyService currencyService;
     private static final String walletName = "wallet";
 
     @Rule
@@ -23,7 +25,8 @@ public class WalletServiceTest {
 
     @Before
     public void setUp() {
-        this.walletService = new WalletService();
+        this.currencyService = mock(CurrencyService.class);
+        this.walletService = new WalletService(currencyService);
     }
 
     @Test

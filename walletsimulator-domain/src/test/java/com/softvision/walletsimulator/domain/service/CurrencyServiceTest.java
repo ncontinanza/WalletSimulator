@@ -21,12 +21,12 @@ public class CurrencyServiceTest {
         currencyService = new CurrencyService(currencyClient);
     }
 
-    @Test
+    /*@Test
     public void getCurrenciesTest() {
         LinkedHashMap<String, Double> currencies = new LinkedHashMap<>();
         currencies.put("BTC", 123.456D);
         currencies.put("ETH", 234.567D);
         when(currencyClient.getCurrencies()).thenReturn(currencies);
         Assert.assertEquals(currencies, currencyService.getCurrencies());
-    }
+    }*/
 }
