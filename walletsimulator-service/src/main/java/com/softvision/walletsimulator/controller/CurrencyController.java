@@ -2,6 +2,7 @@ package com.softvision.walletsimulator.controller;
 
 import com.softvision.walletsimulator.domain.service.CurrencyService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,8 @@ public class CurrencyController {
         this.currencyService = currencyService;
     }
 
+    @ApiOperation(value = "currency", notes = "Get all currencies with their values",
+            response = Map.class)
     @GetMapping
     public ResponseEntity<Map<String, Double>> getAllCurrencies() {
         return ResponseEntity.ok(currencyService.getCurrencies());
